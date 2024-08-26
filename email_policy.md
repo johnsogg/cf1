@@ -1,11 +1,11 @@
 Email Policy
 ============
 
-At some point in the past, I spent probably about 25 hours responding to student
-email. It is _fantastic_ that you are willing to ask questions. Keep doing that!
-_But_, many of the emails indicated that people weren't thinking critically, or
-asking around among their peers. This has led to the following policy for
-sending me email on course topics. 
+At some point in the past, I spent probably about 25 hours per week responding
+to student email. It is _fantastic_ that you are willing to ask questions. Keep
+doing that! _But_, many of the emails indicated that people weren't thinking
+critically, or asking around among their peers. This has led to the following
+policy for sending me email on course topics. 
 
 The policy does two things. First, it means you have to start learning how to
 troubleshoot problems on your own (which is a primary skill for anybody
