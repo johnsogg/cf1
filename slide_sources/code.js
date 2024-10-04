@@ -35,3 +35,9 @@ function glurb(a, b) {
     }
     console.log(a * b);
 }
+
+function numberCubed(x) {
+    return x * x * x;
+}
+
+const v = numberCubed(5); // v will be 125
