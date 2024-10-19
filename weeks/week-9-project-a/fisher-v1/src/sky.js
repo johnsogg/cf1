@@ -1,10 +1,10 @@
 class Sky {
-    constructor() {
-
+    constructor({ horizonY }) {
+        this.horizonY = horizonY;
     }
 
     draw() {
         fill('skyblue');
-        rect(0, 0, width, height / 2);
+        rect(0, 0, width, this.horizonY);
     }
 }
