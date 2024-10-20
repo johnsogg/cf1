@@ -132,20 +132,20 @@ const getIntersectionPointAndLineParametric = ({ pt, start, end }) => {
   // see http://paulbourke.net/geometry/pointlineplane/
   const numerator =
     (pt.x - start.x) * (end.x - start.x) + (pt.y - start.y) * (end.y - start.y);
-  const deltaVec = math.subtract(ptToArray(end), ptToArray(start));/*getDeltaVector({ start, end }); */
-  const deltaVecMag = math.norm(deltaVec);/*getVectorMag(deltaVec);*/
+  const deltaVec = math.subtract(ptToArray(end), ptToArray(start));
+  const deltaVecMag = math.norm(deltaVec);
   const denominator = deltaVecMag * deltaVecMag;
   const u = numerator / denominator;
   const ix = {
     x: start.x + u * (end.x - start.x),
     y: start.y + u * (end.y - start.y),
   };
-  const ixToPt = math.subtract(pt, ix); /* getDeltaVector({ start: ix, end: pt });*/
-  const offset = math.norm(ixToPt); /* getVectorMag(ixToPt);*/
+  const ixToPt = math.subtract(pt, ix);
+  const offset = math.norm(ixToPt);
   // now need the sign of that offset
-  const startToEnd = math.subtract(end, start); /* getDeltaVector({ start, end });*/
-  const startToPt = math.subtract(pt, start); /*getDeltaVector({ start, end: pt });*/
-  const det = math.det([ptToArray(startToEnd), ptToArray(startToPt)]);/*getDeterminant(startToEnd, startToPt);*/
+  const startToEnd = math.subtract(end, start);
+  const startToPt = math.subtract(pt, start);
+  const det = math.det([ptToArray(startToEnd), ptToArray(startToPt)]);
   const sign = det < 0 ? -1 : 1;
   return { ...ix, u, offset, sign };
 };
