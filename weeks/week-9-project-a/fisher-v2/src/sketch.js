@@ -114,6 +114,12 @@ function toWorldCoordinates({ points, debug = false, transform }) {
 
 const ptToArray = ({ x, y }) => [x, y];
 
+const arrayToPt = ([x, y]) => { x, y };
+
+const ptPairToSegment = ([start, end]) => ({
+  start, end
+})
+
 // Gives 'intersection' data regarding the given point and a line defined
 // by the start/end points. The return values are:
 // 
@@ -147,7 +153,15 @@ const getIntersectionPointAndLineParametric = ({ pt, start, end }) => {
 // line intercept math by Paul Bourke http://paulbourke.net/geometry/pointlineplane/
 // Determine the intersection point of two line segments
 // Return FALSE if the lines don't intersect
-function intersectLineSegments(x1, y1, x2, y2, x3, y3, x4, y4) {
+const intersectLineSegments = ({ lineA, lineB }) => {
+  const x1 = lineA.start.x;
+  const x2 = lineA.end.x;
+  const x3 = lineB.start.x;
+  const x4 = lineB.end.x;
+  const y1 = lineA.start.y;
+  const y2 = lineA.end.y;
+  const y3 = lineB.start.y;
+  const y4 = lineB.end.y;
 
   // Check if none of the lines are of length 0
   if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4)) {

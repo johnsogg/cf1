@@ -75,13 +75,10 @@ class FishingPole {
         });
 
         const lakeLine = game.world.lake.geom.bottom;
-        const ix2 = intersectLineSegments(
-            delta[0].x, delta[0].y,        // line A, start
-            delta[1].x, delta[1].y,        // line A, end
-            lakeLine[0].x, lakeLine[0].y,  // line B, start
-            lakeLine[1].x, lakeLine[1].y); // line B, end
-        console.log('intersection result:', ix);
-
+        const ix = intersectLineSegments({
+            lineA: ptPairToSegment(delta),
+            lineB: ptPairToSegment(lakeLine),
+        });
 
         if (!ix) {
             this.lineLength = clampToRange(
@@ -89,8 +86,8 @@ class FishingPole {
                 this.lineLength + dir,
                 // smaller bound - should be able to get out of water
                 50,
-                // higher bound - this should be f(lake bottom)
-                900);
+                // higher bound is handled by the above intersection thing
+                9001);
         }
     }
 }
