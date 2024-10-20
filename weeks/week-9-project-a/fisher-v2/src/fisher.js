@@ -7,7 +7,6 @@ class Fisher {
         this.width = 100;
         this.height = 40;
         this.pole = new FishingPole({ poleHeight: 100 });
-        console.log('Fisher min/max x:', this.minX, this.maxX);
     }
 
     draw() {
@@ -22,7 +21,6 @@ class Fisher {
         noStroke();
         fill('green');
         rect(-this.width / 2, -this.height, this.width, this.height);
-        // debugText(0, 10, `Boat Position: ${this.x}, ${this.y}`);
     }
 
     move(dir) {

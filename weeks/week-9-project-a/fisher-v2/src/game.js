@@ -19,6 +19,7 @@ class FisherGame {
             lakeDepth: height * FisherGame.lakeDepth,
             lakeX: width * FisherGame.lakeX,
             lakeWidth: width * FisherGame.lakeWidth,
+            game: this,
         });
     }
 

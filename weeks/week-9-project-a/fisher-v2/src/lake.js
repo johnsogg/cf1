@@ -10,7 +10,21 @@ class Lake {
         push();
         fill('blue');
         noStroke();
-        rect(width / 8, this.horizonY, (6 * width) / 8, this.lakeDepth);
+        const x = width / 8;
+        const y = this.horizonY;
+        const w = (6 * width) / 8;
+        const h = this.lakeDepth;
+        rect(x, y, w, h);
+        const bottom = toWorldCoordinates({
+            points: [{ x, y: y + h }, { x: x + w, y: y + h }],
+        });
+        this.geom = {
+            bottom,
+            transform: getMathJsTransform(),
+        }
+        fill('red');
+        circle(x, y + h, 20);
+        circle(x + w, y + h, 20);
         pop();
     }
 }
