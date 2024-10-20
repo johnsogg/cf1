@@ -50,3 +50,18 @@ function debugText(x, y, msg) {
   text(msg, x, y);
   pop();
 }
+
+function generateSkyColors() {
+  // make some color palettes
+  const tuscon = ["rgb(255, 0, 0)", "rgb(128, 255, 128)", "rgb(40, 40, 128)"];
+  const paris = ["#a25333", "#dbcd95", "#a2c3a6", "#5b2e30", "#848666"];
+  const earth = ["rgb(0, 82, 147)", "rgb(18, 146, 211)", "rgb(142, 191, 224)", "rgb(206, 216, 228)"];
+  const sunset = ["#441404", "#9c2b04", "#f4bf07", "#ec962d"];
+
+  // add them to a master list
+  const palettes = [tuscon, paris, earth, sunset];
+
+  // pick a random one of those & return it
+  return random(palettes);
+
+}
