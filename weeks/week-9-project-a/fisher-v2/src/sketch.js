@@ -13,19 +13,22 @@ function draw() {
   game.draw();
 
   // debugging here
-  const g = game.world.lake.geom;
-  if (g) {
-    // console.log(g);
-    stroke('red');
-    strokeWeight(2);
-    for (let i = 0; i < g.bottom.length - 1; i++) {
-      const ptA = g.bottom[i];
-      const ptB = g.bottom[i + 1];
-      line(ptA.x, ptA.y, ptB.x, ptB.y);
-    }
-  }
+
+  // lake bottom lines
+  const points = game.world.lake.geom.bottom;
+  console.log('debugging:', game);
+  stroke('red');
+  strokeWeight(2);
+  drawLineSequence(points);
 }
 
+function drawLineSequence(points) {
+  for (let i = 0; i < points.length - 1; i++) {
+    const a = points[i];
+    const b = points[i + 1];
+    line(a.x, a.y, b.x, b.y);
+  }
+}
 
 function handleInteraction() {
   if (keyIsPressed) {
@@ -150,6 +153,23 @@ const getIntersectionPointAndLineParametric = ({ pt, start, end }) => {
   return { ...ix, u, offset, sign };
 };
 
+// Intersect a line with all piecewise linear line segments formed by the
+// given point sequence. It returns early when it finds a hit. If there is no
+// intersection it returns null.
+const intersectLineSegmentWithSequence = ({ line, sequence }) => {
+  for (let i = 0; i < sequence.length - 1; i++) {
+    const segment = [sequence[i], sequence[i + 1]];
+    const maybeIx = intersectLineSegments({
+      lineA: ptPairToSegment(line),
+      lineB: ptPairToSegment(segment),
+    });
+    if (maybeIx) {
+      return maybeIx;
+    }
+  }
+  return null;
+}
+
 // line intercept math by Paul Bourke http://paulbourke.net/geometry/pointlineplane/
 // Determine the intersection point of two line segments
 // Return FALSE if the lines don't intersect
@@ -188,4 +208,26 @@ const intersectLineSegments = ({ lineA, lineB }) => {
   let y = y1 + ua * (y2 - y1)
 
   return { x, y }
+}
+
+/** 
+ * Given three points ({x: number, y:number}) this will either return a circle
+ * center point, or null if the circle center can't be computed.
+ **/
+function getCircleCenter(a, b, c) {
+  let A = b.x - a.x;
+  let B = b.y - a.y;
+  let C = c.x - a.x;
+  let D = c.y - a.By;
+
+  let E = A * (a.x + b.x) + B * (a.y + b.y);
+  let F = C * (a.x + c.x) + D * (a.y + c.y);
+
+  let G = 2 * (A * (c.y - b.y) - B * (c.x - b.x));
+  if (G == 0.0)
+    return null; // a, b, c seem to be be collinear
+
+  let x = (D * E - B * F) / G;
+  let y = (A * F - C * E) / G;
+  return ({ x, y });
 }

@@ -51,7 +51,6 @@ class FishingPole {
     }
 
     isHookAboveWater() {
-        console.log(`${this.lineLength}, ${this.poleTip.y}, ${this.lineLength + this.poleTip.y}`);
         return (this.lineLength + this.poleTip.y) < 0;
     }
 
@@ -70,15 +69,12 @@ class FishingPole {
         }
         const delta = toWorldCoordinates({
             points: [{ x: 0, y: 0 }, { x: 0, y: dir }],
-            debug: true,
+            debug: false,
             transform: this.geom.transform
         });
 
-        const lakeLine = game.world.lake.geom.bottom;
-        const ix = intersectLineSegments({
-            lineA: ptPairToSegment(delta),
-            lineB: ptPairToSegment(lakeLine),
-        });
+        const sequence = game.world.lake.geom.bottom;
+        const ix = intersectLineSegmentWithSequence({ line: delta, sequence });
 
         if (!ix) {
             this.lineLength = clampToRange(
