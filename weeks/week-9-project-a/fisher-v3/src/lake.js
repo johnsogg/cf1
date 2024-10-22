@@ -5,16 +5,23 @@ class Lake {
         this.lakeWidth = lakeWidth;
         this.lakeX = lakeX;
         this.buildLakeBottom();
+        this.populateFish();
     }
 
     buildLakeBottom() {
-        // for now, this is a triangular bottom. The plan is to
-        // create something based on a circular bottom, and jiggle
-        // the points up or down a little bit to get an organic-ish shape.
+        // for now, this is a triangular bottom. The plan is to create something
+        // based on a circular bottom, and jiggle the points up or down a little
+        // bit to get an organic-ish shape.
         let topLeft = { x: this.lakeX, y: this.horizonY };
         let topRight = { x: this.lakeX + this.lakeWidth, y: this.horizonY };
         let bottom = { x: (topLeft.x + topRight.x) / 2, y: this.horizonY + this.lakeDepth };
         this.lakeBottom = [topLeft, bottom, topRight];
+        this.lakeCenter = { x: bottom.x, y: this.horizonY + (this.lakeDepth / 2) }
+    }
+
+    populateFish() {
+        this.fish = [];
+        this.fish.push(new Fish(this.lakeCenter.x, this.lakeCenter.y, 60, 40));
     }
 
     draw() {
@@ -37,6 +44,16 @@ class Lake {
             bottom,
             transform: getMathJsTransform(),
         }
+        this.drawFish();
         pop();
     }
+
+    drawFish() {
+        this.fish.forEach(f => {
+            push();
+            f.draw();
+            pop();
+        });
+    }
+
 }

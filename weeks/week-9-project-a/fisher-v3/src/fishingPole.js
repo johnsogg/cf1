@@ -10,28 +10,26 @@ class FishingPole {
         this.geom = undefined;
     }
 
-    draw() {
+    draw({ x, y }) {
         push();
         stroke('red');
         strokeWeight(2);
-        line(0, 0, this.poleTip.x, this.poleTip.y);
-        this.drawHook();
+        line(x, y, x + this.poleTip.x, y + this.poleTip.y);
+        this.drawHook({ x, y });
         pop();
     }
 
-    drawHook() {
+    drawHook({ x, y }) {
         strokeWeight(1);
         stroke('#ffffff50');
         line(
-            this.poleTip.x,
-            this.poleTip.y,
-            this.poleTip.x,
-            this.poleTip.y + this.lineLength);
-        translate(this.poleTip.x,
-            this.poleTip.y + this.lineLength);
+            x + this.poleTip.x,
+            y + this.poleTip.y,
+            x + this.poleTip.x,
+            y + this.poleTip.y + this.lineLength);
         ellipseMode(CENTER);
         fill('#20202090')
-        circle(0, 0, this.hookSize);
+        circle(x + this.poleTip.x, y + this.poleTip.y + this.lineLength, this.hookSize);
         const whirled = toWorldCoordinates({ points: [{ x: 0, y: 0 }, { x: 10, y: 20 }] });
         const p1 = whirled[0];
         this.geom = {
@@ -39,7 +37,7 @@ class FishingPole {
             radius: this.hookSize,
             transform: getMathJsTransform(),
         }
-        debugText(10, 10, `Length: ${this.lineLength}, hook(world): ${p1.x}, ${p1.y}`);
+        debugText(x + this.poleTip.x + 10, y + this.poleTip.y + 10 + this.lineLength, `Length: ${this.lineLength}, hook(world): ${p1.x}, ${p1.y}`);
     }
 
     setDirection(dir) {

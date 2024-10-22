@@ -1,7 +1,7 @@
 let game;
 
 function setup() {
-  // pixelDensity(1);
+  pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
   game = new FisherGame();
 }
@@ -11,12 +11,12 @@ function draw() {
 
   background(220);
   game.draw();
+  game.world.lake.fish.forEach(f => f.move());
 
   // debugging here
 
   // lake bottom lines
   const points = game.world.lake.geom.bottom;
-  console.log('debugging:', game);
   stroke('red');
   strokeWeight(2);
   drawLineSequence(points);
@@ -101,18 +101,19 @@ function toWorldCoordinates({ points, debug = false, transform }) {
   // Note: if the pixel density is anything other than one, we have to 
   // adjust all points by scaling them by the current device pixel density.
   // So you'll see down below how I'm multiplying x and y by ss.
-  const ss = pixelDensity();
+  const ss = pixelDensity(); // it seems the transform will sometimes account for this? wtf am I am supposed to do?
   const inv = math.inv(t);
-  if (debug) {
-    console.log('points:', points);
-    console.log('t:', t);
-    console.log('inv:', inv);
-  }
-  return points.map(p => {
+  const ret = points.map(p => {
     const [x, y] = math.multiply(inv, [p.x * ss, p.y * ss, -1]);
     return { x, y };
   });
-
+  if (debug) {
+    console.log(`${frameCount} local points:`, points);
+    console.log(`${frameCount} transform:`, t);
+    console.log(`${frameCount} inverse:`, inv);
+    console.log(`${frameCount} world points:`, ret);
+  }
+  return ret;
 }
 
 const ptToArray = ({ x, y }) => [x, y];
@@ -156,7 +157,10 @@ const getIntersectionPointAndLineParametric = ({ pt, start, end }) => {
 // Intersect a line with all piecewise linear line segments formed by the
 // given point sequence. It returns early when it finds a hit. If there is no
 // intersection it returns null.
-const intersectLineSegmentWithSequence = ({ line, sequence }) => {
+const intersectLineSegmentWithSequence = ({ line, sequence, debug }) => {
+  if (debug) {
+    console.log("intersectLineSegmentWithSequence:", line, sequence);
+  }
   for (let i = 0; i < sequence.length - 1; i++) {
     const segment = [sequence[i], sequence[i + 1]];
     const maybeIx = intersectLineSegments({

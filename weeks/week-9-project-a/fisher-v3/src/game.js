@@ -41,18 +41,14 @@ class FisherGame {
         push();
         fill('lightGreen');
         noStroke();
-        translate(FisherGame.pad,
-            height - (FisherGame.pad + FisherGame.hintsGeom.height));
-        rect(0, 0, FisherGame.hintsGeom.width, FisherGame.hintsGeom.height);
+        rect(FisherGame.pad, height - (FisherGame.pad + FisherGame.hintsGeom.height), FisherGame.hintsGeom.width, FisherGame.hintsGeom.height);
         pop();
 
         // score drawn at bottom right
         push();
         fill('#ffffff20');
         noStroke();
-        translate(width - (FisherGame.pad + FisherGame.scoreGeom.width),
-            height - (FisherGame.pad + FisherGame.hintsGeom.height));
-        rect(0, 0, FisherGame.scoreGeom.width, FisherGame.scoreGeom.height);
+        rect(width - (FisherGame.pad + FisherGame.scoreGeom.width), height - (FisherGame.pad + FisherGame.hintsGeom.height), FisherGame.scoreGeom.width, FisherGame.scoreGeom.height);
         noStroke();
         fill('#aaa');
         textAlign(CENTER, CENTER);

@@ -11,8 +11,7 @@ class Fisher {
 
     draw() {
         push();
-        translate(this.x, this.y);
-        this.pole.draw();
+        this.pole.draw({ x: this.x, y: this.y });
         this.drawBoat();
         pop();
     }
@@ -20,7 +19,7 @@ class Fisher {
     drawBoat() {
         noStroke();
         fill('green');
-        rect(-this.width / 2, -this.height, this.width, this.height);
+        rect(this.x + (-this.width / 2), this.y - this.height, this.width, this.height);
     }
 
     move(dir) {
