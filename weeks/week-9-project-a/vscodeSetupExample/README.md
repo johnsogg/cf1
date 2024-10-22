@@ -44,6 +44,7 @@ Now that you're seeing all the files and have full control over your p5 project,
 Create `boid.js` right next to `sketch.js`. Here's code to paste into the new Boid file:
 
 ```js
+// boid.js
 class Boid {
     constructor(x, y) {
         this.x = x;
@@ -60,9 +61,21 @@ class Boid {
 }
 ```
 
-This simply defines a class with a single method, `draw`. Now let's use it from the `sketch.js` file. Edit that file to look thusly:
+This simply defines a class with a single method, `draw`. In order to use it we have to also add it to the `index.html` file:
+
+```html
+<!-- part of index.html -->
+<body>
+  <!-- add a line like the following for every new file you have -->
+  <script src="boid.js"></script> 
+  <script src="sketch.js"></script>
+</body>
+```
+
+Then we can use the `Boid` class from the `sketch.js` file. Edit that file to look thusly:
 
 ```js
+// sketch.js
 let tweety;
 
 function setup() {
