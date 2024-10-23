@@ -40,10 +40,6 @@ class Lake {
         const bottom = toWorldCoordinates({
             points: this.lakeBottom
         });
-        this.geom = {
-            bottom,
-            transform: getMathJsTransform(),
-        }
         this.drawFish();
         pop();
     }

@@ -22,7 +22,7 @@ class Fish {
         };
 
         const delta = [this, next];
-        const sequence = game.world.lake.geom.bottom;
+        const sequence = game.world.lake.lakeBottom;
         const ix = intersectLineSegmentWithSequence({ line: delta, sequence, debug: true });
         if (ix) {
             this.v = { x: -this.v.x, y: this.v.y };

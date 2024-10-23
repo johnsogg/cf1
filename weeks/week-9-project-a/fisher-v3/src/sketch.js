@@ -16,7 +16,7 @@ function draw() {
   // debugging here
 
   // lake bottom lines
-  const points = game.world.lake.geom.bottom;
+  const points = game.world.lake.lakeBottom;
   stroke('red');
   strokeWeight(2);
   drawLineSequence(points);

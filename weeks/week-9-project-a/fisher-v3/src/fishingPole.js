@@ -30,14 +30,12 @@ class FishingPole {
         ellipseMode(CENTER);
         fill('#20202090')
         circle(x + this.poleTip.x, y + this.poleTip.y + this.lineLength, this.hookSize);
-        const whirled = toWorldCoordinates({ points: [{ x: 0, y: 0 }, { x: 10, y: 20 }] });
-        const p1 = whirled[0];
         this.geom = {
-            ref: p1,
+            hookPt: { x: x + this.poleTip.x, y: y + this.poleTip.y + this.lineLength },
             radius: this.hookSize,
             transform: getMathJsTransform(),
         }
-        debugText(x + this.poleTip.x + 10, y + this.poleTip.y + 10 + this.lineLength, `Length: ${this.lineLength}, hook(world): ${p1.x}, ${p1.y}`);
+        debugText(x + this.poleTip.x + 10, y + this.poleTip.y + 10 + this.lineLength, `Length: ${this.lineLength}, hook(world): ${this.geom.hookPt.x}, ${this.geom.hookPt.y}`);
     }
 
     setDirection(dir) {
@@ -53,25 +51,9 @@ class FishingPole {
     }
 
     moveLine(game, dir) {
-        // make a movement line segment and collide that with all the
-        // segments that make up the lake bottom. If there's a hit
-        // inside the segments, the intersection point is the limit of
-        // how far we can go.
-        const hookPosition = {
-            x: this.poleTip.x,
-            y: this.poleTip.y + this.lineLength
-        }
-        if (!this.geom.transform) {
-            console.log('Dang this wont work');
-            debugger;
-        }
-        const delta = toWorldCoordinates({
-            points: [{ x: 0, y: 0 }, { x: 0, y: dir }],
-            debug: false,
-            transform: this.geom.transform
-        });
-
-        const sequence = game.world.lake.geom.bottom;
+        const { x, y } = this.geom.hookPt;
+        const delta = [{ x, y }, { x, y: y + dir }];
+        const sequence = game.world.lake.lakeBottom;
         const ix = intersectLineSegmentWithSequence({ line: delta, sequence });
 
         if (!ix) {
