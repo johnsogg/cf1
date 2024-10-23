@@ -223,7 +223,7 @@ function getCircleCenter(a, b, c) {
   let A = b.x - a.x;
   let B = b.y - a.y;
   let C = c.x - a.x;
-  let D = c.y - a.By;
+  let D = c.y - a.y;
 
   let E = A * (a.x + b.x) + B * (a.y + b.y);
   let F = C * (a.x + c.x) + D * (a.y + c.y);
