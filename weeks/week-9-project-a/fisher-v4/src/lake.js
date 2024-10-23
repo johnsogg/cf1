@@ -32,11 +32,13 @@ class Lake {
         const buildPoints = initialPoints.map(pt => {
             return {
                 x: pt.x,
-                y: clampToRange(randomGaussian(pt.y, FisherGame.lakeRandomnessY), this.horizonY, height - FisherGame.pad),
+                y: clampToRange(
+                    randomGaussian(pt.y, FisherGame.lakeRandomnessY),
+                    this.horizonY,
+                    height - FisherGame.pad),
             }
         });
         this.lakeBottom = [topLeft, ...buildPoints, topRight];
-        console.log('lakeBottom:', this.lakeBottom);
     }
 
     populateFish() {
@@ -49,37 +51,15 @@ class Lake {
 
     draw() {
         push();
-
-        fill('blue');
-        noStroke();
-        const x = width / 8;
-        const y = this.horizonY;
-        const w = (6 * width) / 8;
-        const h = this.lakeDepth;
-        // rect(x, y, w, h);
         fill('lightblue');
-
-        // newfangled bezier approach
         beginShape();
-        vertex(this.lakeBottom[0].x, this.lakeBottom[0].y);
-        // 1 2 3 - 4 5 6 - 7 8 9 - need a length of 10 (or any n % 3 == 1)
-        for (let i = 1; i < this.lakeBottom.length - 2; i += 3) {
-            const a = this.lakeBottom[i + 0];
-            const b = this.lakeBottom[i + 1];
-            const c = this.lakeBottom[i + 2];
-            bezierVertex(a.x, a.y, b.x, b.y, c.x, c.y);
+        const pts = [this.lakeBottom[0], ...this.lakeBottom, this.lakeBottom[this.lakeBottom.length - 1]];
+        for (let i = 0; i < pts.length; i++) {
+            curveVertex(pts[i + 0].x, pts[i + 0].y);
         }
         endShape();
-
-        // original piecewise linear approach
-        // beginShape();
-        // this.lakeBottom.forEach(p => vertex(p.x, p.y));
-        // endShape();
-        const bottom = toWorldCoordinates({
-            points: this.lakeBottom
-        });
-        this.drawFish();
         pop();
+        this.drawFish();
     }
 
     drawFish() {
