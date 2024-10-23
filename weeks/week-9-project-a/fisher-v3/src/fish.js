@@ -52,7 +52,7 @@ class Fish {
 
         const delta = [this, next];
         const sequence = game.world.lake.lakeBottom;
-        const ix = intersectLineSegmentWithSequence({ line: delta, sequence, closedSequence: true, debug: true });
+        const ix = intersectLineSegmentWithSequence({ line: delta, sequence, closedSequence: true, debug: false });
         if (ix) {
             this.turn();
         } else if (frameCount > this.turnFrame) {

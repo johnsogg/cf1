@@ -20,6 +20,21 @@ function draw() {
   stroke('red');
   strokeWeight(2);
   drawLineSequence(points);
+
+  // lake initial circle
+  fill('red');
+  ellipseMode(CENTER);
+  circle(game.world.lake.c.x, game.world.lake.c.y, 20);
+  noFill();
+  stroke('red');
+  strokeWeight(1.0);
+  circle(game.world.lake.c.x, game.world.lake.c.y, 2 * distBetweenPoints(game.world.lake.c, game.world.lake.lakeBottom[0]));
+
+  // lake build points
+  fill('red');
+  game.world.lake.lakeBottom.forEach(pt => {
+    circle(pt.x, pt.y, 20);
+  })
 }
 
 function drawLineSequence(points) {
@@ -237,7 +252,27 @@ function getCircleCenter(a, b, c) {
   return ({ x, y });
 }
 
+function distBetweenPoints(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
 /** Invokes a callback function with no arguments n times. */
 function repeat(n, callback) {
   [...Array(n)].forEach(callback);
+}
+
+function getPointsOnCircle({ center, startAngle, endAngle, numPoints, radius }) {
+  const delta = (endAngle - startAngle) / (numPoints + 1);
+  const { x, y } = center;
+  const ret = [];
+  for (let i = 1; i <= numPoints; i++) {
+    const θ = startAngle + (i * delta);
+    const dx = radius * Math.cos(θ);
+    const dy = radius * Math.sin(θ);
+    ret.push({
+      x: x + dx,
+      y: y + dy,
+    })
+  }
+  return ret;
 }

@@ -7,6 +7,8 @@ class FisherGame {
     static lakeDepth = 1 / 3;
     static lakeX = 1 / 8;
     static lakeWidth = 6 / 8;
+    static lakeNumPoints = 9;
+    static lakeRandomnessY = 40;
 
     constructor() {
         this.initializeWorld();
@@ -48,12 +50,18 @@ class FisherGame {
         push();
         fill('#ffffff20');
         noStroke();
-        rect(width - (FisherGame.pad + FisherGame.scoreGeom.width), height - (FisherGame.pad + FisherGame.hintsGeom.height), FisherGame.scoreGeom.width, FisherGame.scoreGeom.height);
+        rect(
+            width - (FisherGame.pad + FisherGame.scoreGeom.width),
+            height - (FisherGame.pad + FisherGame.scoreGeom.height),
+            FisherGame.scoreGeom.width,
+            FisherGame.scoreGeom.height);
         noStroke();
         fill('#aaa');
         textAlign(CENTER, CENTER);
         textSize(40);
-        text(this.score, FisherGame.hintsGeom.width / 2, FisherGame.hintsGeom.height / 2)
+        text(this.score,
+            width - (FisherGame.pad + FisherGame.scoreGeom.width / 2),
+            height - (FisherGame.pad + FisherGame.scoreGeom.height / 2));
         pop();
     }
 
