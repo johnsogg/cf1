@@ -21,7 +21,10 @@ class Lake {
 
     populateFish() {
         this.fish = [];
-        this.fish.push(new Fish(this.lakeCenter.x, this.lakeCenter.y, 60, 40));
+        repeat(5, (() => {
+            this.fish.push(new Fish(this.lakeCenter.x, this.lakeCenter.y, 60, 40));
+        }));
+
     }
 
     draw() {

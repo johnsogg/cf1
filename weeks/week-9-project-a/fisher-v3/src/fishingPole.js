@@ -32,10 +32,7 @@ class FishingPole {
         circle(x + this.poleTip.x, y + this.poleTip.y + this.lineLength, this.hookSize);
         this.geom = {
             hookPt: { x: x + this.poleTip.x, y: y + this.poleTip.y + this.lineLength },
-            radius: this.hookSize,
-            transform: getMathJsTransform(),
         }
-        debugText(x + this.poleTip.x + 10, y + this.poleTip.y + 10 + this.lineLength, `Length: ${this.lineLength}, hook(world): ${this.geom.hookPt.x}, ${this.geom.hookPt.y}`);
     }
 
     setDirection(dir) {

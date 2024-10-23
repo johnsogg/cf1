@@ -157,12 +157,13 @@ const getIntersectionPointAndLineParametric = ({ pt, start, end }) => {
 // Intersect a line with all piecewise linear line segments formed by the
 // given point sequence. It returns early when it finds a hit. If there is no
 // intersection it returns null.
-const intersectLineSegmentWithSequence = ({ line, sequence, debug }) => {
+const intersectLineSegmentWithSequence = ({ line, sequence, debug, closedSequence }) => {
   if (debug) {
     console.log("intersectLineSegmentWithSequence:", line, sequence);
   }
-  for (let i = 0; i < sequence.length - 1; i++) {
-    const segment = [sequence[i], sequence[i + 1]];
+  const limit = closedSequence ? sequence.length : sequence.length - 1;
+  for (let i = 0; i < limit; i++) {
+    const segment = [sequence[i], sequence[(i + 1) % sequence.length]];
     const maybeIx = intersectLineSegments({
       lineA: ptPairToSegment(line),
       lineB: ptPairToSegment(segment),
@@ -234,4 +235,9 @@ function getCircleCenter(a, b, c) {
   let x = (D * E - B * F) / G;
   let y = (A * F - C * E) / G;
   return ({ x, y });
+}
+
+/** Invokes a callback function with no arguments n times. */
+function repeat(n, callback) {
+  [...Array(n)].forEach(callback);
 }
