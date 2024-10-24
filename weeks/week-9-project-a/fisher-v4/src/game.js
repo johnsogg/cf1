@@ -9,6 +9,14 @@ class FisherGame {
     static lakeWidth = 6 / 8;
     static lakeNumPoints = 8;
     static lakeRandomnessY = 40;
+    static biteMinDist = 40;
+    static caughtAnimationTime = 1000;
+    static numFish = 0; // will be set by generateNumFish
+
+    static generateNumFish() {
+        FisherGame.numFish = Math.round(randomGaussian(6, 2.5));
+        return this.numFish;
+    }
 
     constructor() {
         this.initializeWorld();

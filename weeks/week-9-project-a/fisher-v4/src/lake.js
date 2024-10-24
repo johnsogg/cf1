@@ -43,10 +43,9 @@ class Lake {
 
     populateFish() {
         this.fish = [];
-        repeat(5, (() => {
+        repeat(FisherGame.generateNumFish(), (() => {
             this.fish.push(new Fish(this.lakeCenter.x, this.lakeCenter.y, 60, 40));
         }));
-
     }
 
     draw() {

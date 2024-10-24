@@ -11,30 +11,22 @@ function draw() {
 
   background(220);
   game.draw();
-  game.world.lake.fish.forEach(f => f.move());
+  game.world.lake.fish.filter(f => !f.caught).forEach(f => f.move());
+  game.world.lake.fish.filter(f => !f.caught).forEach(f => {
+    if (f.bite(game.world.fisher.pole.geom.hookPt)) {
+      game.score++;
+      f.setCaught();
+    }
+  });
+  const numFishCaught = game.world.lake.fish.filter(f => f.caught).length;
+  if (numFishCaught == FisherGame.numFish) {
+    game.initializeWorld();
+  } else {
+    if (frameCount % 60 == 0) {
+      console.log(`${FisherGame.numFish - numFishCaught} more fish to go`);
+    }
+  }
 
-  // debugging here
-
-  // lake bottom lines
-  // const points = game.world.lake.lakeBottom;
-  // stroke('red');
-  // strokeWeight(2);
-  // drawLineSequence(points);
-
-  // lake initial circle
-  // fill('red');
-  // ellipseMode(CENTER);
-  // circle(game.world.lake.c.x, game.world.lake.c.y, 20);
-  // noFill();
-  // stroke('red');
-  // strokeWeight(1.0);
-  // circle(game.world.lake.c.x, game.world.lake.c.y, 2 * distBetweenPoints(game.world.lake.c, game.world.lake.lakeBottom[0]));
-
-  // lake build points
-  // fill('red');
-  // game.world.lake.lakeBottom.forEach(pt => {
-  //   circle(pt.x, pt.y, 20);
-  // })
 }
 
 function drawLineSequence(points) {

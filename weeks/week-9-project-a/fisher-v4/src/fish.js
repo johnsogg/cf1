@@ -18,6 +18,15 @@ class Fish {
         // only expressed in positive terms here - it will flip ± each time.
         this.xProb = { mean: 0.8, sd: 0.3 };
         this.yProb = { mean: 0.2, sd: 0.05 };
+
+        // catch likelihood increases when the fish is near the hook, and when
+        // it exceeds this fish's randomly determined limit, it will bite. Set
+        // a boolean 'caught' flag and note time of death for a fun animation.
+        this.catchLikelihood = 0;
+        this.catchLikelihoodLimit = randomGaussian(130, 40);
+        this.caught = false;
+        this.caughtTime = 0;
+
         // turning right away essentially picks a random initial vector and sets
         // the next turnFrame value
         this.turn();
@@ -37,9 +46,29 @@ class Fish {
     }
 
     draw() {
+        if (this.caught) {
+            this.drawCaught();
+            return;
+        }
         push();
         fill('midnightblue');
         ellipseMode(CENTER);
+        ellipse(this.x, this.y, this.w, this.h);
+        const catchAmount = this.catchLikelihood / this.catchLikelihoodLimit;
+        if (catchAmount > 0) {
+            fill('pink');
+            ellipse(this.x, this.y, this.w * catchAmount, this.h * catchAmount);
+        }
+        pop();
+    }
+
+    drawCaught() {
+        const t = frameCount - this.caughtTime;
+        const clarity = map(t, 0, 60, 255, 0);
+        if (clarity >= 255) return;
+        push();
+        translate(0, -t * 3);
+        fill(0, 0, 0, clarity);
         ellipse(this.x, this.y, this.w, this.h);
         pop();
     }
@@ -61,5 +90,20 @@ class Fish {
             this.x += this.v.x;
             this.y += this.v.y;
         }
+    }
+
+    bite(hookPt) {
+        if (distBetweenPoints(hookPt, this) < FisherGame.biteMinDist) {
+            this.catchLikelihood++;
+        } else {
+            this.catchLikelihood = Math.max(this.catchLikelihood - 1, 0);
+        }
+        return (this.catchLikelihood > this.catchLikelihoodLimit);
+    }
+
+    setCaught() {
+        this.caught = true;
+        this.caughtTime = frameCount;
+        console.log('Caught a fish!');
     }
 }
