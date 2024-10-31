@@ -18,10 +18,11 @@ and good practices is the art of avoiding those problems in the first place.
 
 ## Debugging vs Bugging
 
-If you're not debugging, you're bugging. If you want to build software, you'll
-have to face the inevitable fact that the code that you write will have bugs in
-it mixed in with all those wonderful features. The trick is to know how to find
-and (maybe) fix those problems.
+If you want to build software, you'll have to face the inevitable fact that the
+code that you write will have bugs in it mixed in with all those wonderful
+features. The trick is to know how to find and (maybe) fix those problems.
+
+If you're not debugging, you're bugging. 
 
 ## You Don't Know What You're Building (And That's OK)
 
@@ -109,6 +110,9 @@ you really need to address the "why" before the "how" is even relevant.
 
 ## Three Virtues
 
+_(This section lifted verbatim from
+[thethreevirtues.com](https://thethreevirtues.com/))_
+
 According to Larry Wall, the original author of the Perl programming language,
 there are three great virtues of a programmer; Laziness, Impatience and Hubris.
 
@@ -132,7 +136,7 @@ be a lazy impatient jerk.
 
 Death, taxes, and software bugs.
 
-So if writing code is the way to solve some problem, and you don't know what
+If writing code is the way to solve some problem, and you don't know what
 you're building, and you're imperfect and make mistakes, wrong assumptions, or
 miscommunicate with the other humans involved, you will find yourself with bugs.
 I guarantee this, 100%. 
@@ -221,7 +225,10 @@ Our crusty friend that I mentioned earlier wants us to use a proper debugger.
 These tools generally work like this: the program runs in a debugging mode. You
 can pause it and inspect the state of the program, and even step through it one
 expression or line at a time. You can set a 'break point' so it will run until
-it gets to that break point and then pause. For example:
+it gets to that break point and then pause. Like _print_ statements, every
+language I am aware of has debugging support because it is so vitally important.
+
+For example:
 
 ![Debugging Javascript Code](debugger.png)
 
@@ -267,8 +274,8 @@ Whenever you have `n` items and you're stepping through them, it is possible
 that you're missing the first one, the last one, or something like that. The
 culprit in these cases is often an inequality or an integer:
 
-```
-for (int i=0; i <= myList.length; i++>) {
+```javascript
+for (let i=0; i <= myList.length; i++) {
   doSomething(myList[i]); // this will explode when i == length!
 }
 ```
@@ -310,14 +317,15 @@ My point here is that you can be a bit cavalier when writing code: you can hack
 to explore ideas, and then come back through and improve it. Don't be afraid to
 forge ahead and "think with your hands" as some people say.
 
-## In Sum: That Was Too Long?
+## In Sum: Have A Bias Towards Progress
 
-If you're just starting to code, most of this probably won't resonate. My advice
-is to embrace the uncertainty and try to stay at the edge of your comfort zone.
-Develop strategies for knowing when to "think" and when to take action. When
-things go wrong: don't panic! And there too, you'll need to develop strategies
-to discover what's wrong, how to fix it, and how to characterize the mistakes so
-you can pattern match better next time.
+If you're just starting to code, most of this probably won't resonate just yet.
+My advice is to embrace the uncertainty and try to stay at the edge of your
+comfort zone. Develop strategies for knowing when to "think" and when to take
+action. When things go wrong: don't panic! And there too, you'll need to develop
+strategies to discover what's wrong, how to fix it, and how to characterize the
+mistakes so you can pattern match better next time.
 
 It takes a long time to become a really good programmer, but it can be a lot of
-fun if you have the right frame of mind as you get there.
+fun if you have the right frame of mind as you get there. Just have a bias
+towards making progress, either by "thinking" or by slinging code.
