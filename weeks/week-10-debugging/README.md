@@ -9,18 +9,18 @@ I have to admit that it felt a little bit self-absorbed when I just wrote that
 header: "Good Coding Practices". I've been coding for over 30 years and I am
 still discovering what that means for me, so it is a _little_ obnoxious to think
 that I can just summarize a complete definitive list. Consider this a "here's
-how I see it at the moment" sort of thing. Still: 30 years is a long time to do
+how I see it at the moment" sort of thing. Still: 30 years is a long time to
 practice any art, and I want to share that experience so you can learn from it.
+
+## Debugging vs Bugging
 
 This essay is about both _debugging_ and the other side of its coin, _good coding
 practices_. Debugging is the art of finding and fixing problems with your code,
 and good practices is the art of avoiding those problems in the first place.
 
-## Debugging vs Bugging
-
 If you want to build software, you'll have to face the inevitable fact that the
-code that you write will have bugs in it mixed in with all those wonderful
-features. The trick is to know how to find and (maybe) fix those problems.
+code that you write will have bugs mixed with all those wonderful features. The
+trick is to know how to find and (maybe) fix those problems.
 
 If you're not debugging, you're bugging. 
 
@@ -101,12 +101,12 @@ Choose between these:
 Engineers love to build and optimize. I love it. But as Peter Drucker once
 wrote, "there is nothing so useless as doing efficiently that which should not
 be done at all". If you're going to apply your time and talent to writing code,
-shouldn't you work on the right problem?
+shouldn't you work on the right problem? (Or a right _enough_ problem?)
 
-Engineers don't generally love defining the problem: who has it, what we might
-do about it, what's feasible, how long it will take (because money), and so on.
-But if you want to build the right thing for the right people in the right way,
-you really need to address the "why" before the "how" is even relevant.
+Engineers don't generally love to define problems: who has it, what we might do
+about it, what's feasible, how long it will take (because money), and so on. But
+if you want to build a good thing for the right people in an effective way, you
+really need to address the "why" before the "how" is even relevant.
 
 ## Three Virtues
 
@@ -136,10 +136,10 @@ be a lazy impatient jerk.
 
 Death, taxes, and software bugs.
 
-If writing code is the way to solve some problem, and you don't know what
-you're building, and you're imperfect and make mistakes, wrong assumptions, or
+If writing code is the way to solve some problem, and you don't know what you're
+building, and you're imperfect and make mistakes, hold wrong assumptions, or
 miscommunicate with the other humans involved, you will find yourself with bugs.
-I guarantee this, 100%. 
+This describes basically every programmer. Bugs are guaranteed, 100%. 
 
 ### Characterize Bugs
 
