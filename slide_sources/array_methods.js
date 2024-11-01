@@ -14,7 +14,13 @@ eat = ((v, a) => '💩');
 
 const raw = ['🥔', '🐮', '🥬', '🐷'];
 
+raw.forEach(thing => console.log(thing + " is ready to go"));
+
 const cooked = raw.map(cook); // ['🍟','🍔','🥗','🥓']
+
+const altCooked = raw.map(
+    (ingredient) => ingredient + " is now cooked!"
+);
 
 const eatenAll = cooked.reduce(eat); // '💩'
 
@@ -36,4 +42,4 @@ const sumOfYInZone = points
     .map(pt => pt.y)
     .reduce((v, sum) => sum + v, 0);
 
-console.log("Sum of y value in region is", sumOfYInZone); // 110
+// console.log("Sum of y value in region is", sumOfYInZone); // 110
