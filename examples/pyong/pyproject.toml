@@ -1,0 +1,22 @@
+[project]
+name = "pyong"
+version = "0.1.0"
+description = "Python Pong clone using Pygame"
+authors = [
+    {name = "User"}
+]
+readme = "README.md"
+requires-python = "^3.12"
+dependencies = [
+    "pygame (>=2.6.1,<3.0.0)",
+    "numpy (>=2.3.2,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.17.1"
+
