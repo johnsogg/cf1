@@ -1,6 +1,6 @@
 # CF1 — Topic Punchlist
 
----
+> This summarizes the 2024 and 2025 semesters. It is a historical artifact.
 
 ## Week 1, Lecture 1 — Course Overview
 - Course structure and arc (JS → project → Python → project → final)
@@ -139,7 +139,8 @@
 - Negative indexing (`list[-1]`)
 - `len()` as built-in (not a method)
 - Try/except (vs JS try/catch); named exception; traceback
-- Dictionary operations: safe access (`.get`), remove (`del`, `pop`, `clear`), iteration (`.keys`, `.values`, `.items`)
+- Dictionary operations: safe access (`.get`), remove (`del`, `pop`, `clear`),
+  iteration (`.keys`, `.values`, `.items`)
 - Functions: `def`, `return`, multiple params
 - Default parameter values
 - Keyword arguments; `*` to force named-only params
@@ -163,7 +164,8 @@
 
 ## Week 12, Lecture 1 — Vibe Coding
 - Vibe coding as a spectrum (full generation → tutoring only)
-- Tools landscape: browser chatbots, vibe platforms (Lovable, Replit, Figma Make), in-editor agents (Cursor, Copilot, Claude Code)
+- Tools landscape: browser chatbots, vibe platforms (Lovable, Replit, Figma
+  Make), in-editor agents (Cursor, Copilot, Claude Code)
 - Trade-offs: comprehension vs speed
 - Live demo: Roboworld built in class with git snapshots
 - Caveat: content has a short shelf life
