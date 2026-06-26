@@ -1,0 +1,17 @@
+{
+    "python.defaultInterpreterPath": "./venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.typeCheckingMode": "off",
+    "python.linting.enabled": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.mypyEnabled": false,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "ruff.path": ["poetry", "run", "ruff"],
+    "ruff.lint.enable": false
+}
